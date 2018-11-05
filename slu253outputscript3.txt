@@ -1,0 +1,61 @@
+Warning: Using a password on the command line interface can be insecure.
+ERROR 1146 (42S02) at line 23: Table 'slu253assign2db.purchases' doesn't exist
+--------------
+SELECT description from products
+--------------
+
+description
+Bike
+Socks
+play station
+Elbow pads
+Knee Pads
+Roller Blades
+Helmet
+--------------
+SELECT DISTINCT city from customers
+--------------
+
+city
+Bedrock
+Springfield
+Kypto
+Providence
+--------------
+SELECT * FROM agents ORDER BY city
+--------------
+
+agent_id	FName	LName	city	commission_percentage
+33	David	Letterman	Bedrock	100
+11	Regis	Philbin	Boston	33
+23	Sheng	Lu	London	99
+22	Countney	Cox	New York	25
+12	Rosie	Cox	Ottawa	50
+66	Rosie	ODonnell	Ottawa	100
+99	hugh	Grant	Springfield	16
+--------------
+SELECT first_name, Last_name FROM customers WHERE city='Springfield'
+--------------
+
+first_name	Last_name
+Monty	Burns
+Homer	Simpson
+Sideshow	Bob
+--------------
+SELECT last_name FROM customers WHERE agent_id = 11
+--------------
+
+last_name
+Rubble
+Flintstone
+--------------
+SELECT description FROM products WHERE description LIKE '%pad%' OR description LIKE '%Pad%'
+--------------
+
+description
+Elbow pads
+Knee Pads
+--------------
+SELECT customers.last_name, products.description, purchases.quantity FROM customers, products, purchases WHERE purchases.customer_id = customers.customer_id AND purchases.product_id = products.product_id
+--------------
+

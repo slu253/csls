@@ -1,0 +1,96 @@
+Warning: Using a password on the command line interface can be insecure.
+ERROR 1064 (42000) at line 53: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '--create table pruchase
+CREATE TABLE purchases (
+    customer_id CHAR(2) NOT NUL' at line 1
+--------------
+SHOW DATABASES
+--------------
+
+Database
+information_schema
+mysql
+performance_schema
+slu253assign2db
+--------------
+DROP DATABASE IF EXISTS slu253assign2db
+--------------
+
+--------------
+CREATE DATABASE slu253assign2db
+--------------
+
+--------------
+GRANT USAGE ON *.* TO 'ta'@'localhost'
+--------------
+
+--------------
+DROP USER 'ta'@'localhost'
+--------------
+
+--------------
+CREATE USER 'ta'@'localhost' IDENTIFIED BY 'cs3319'
+--------------
+
+--------------
+GRANT ALL PRIVILEGES ON slu253assign2db.* TO 'ta'@'localhost'
+--------------
+
+--------------
+FLUSH PRIVILEGES
+--------------
+
+--------------
+SHOW TABLES
+--------------
+
+--------------
+CREATE TABLE agents(
+	agent_id CHAR(2) NOT NULL, 
+	FName VARCHAR(30), 
+	LName VARCHAR(30), 
+	city VARCHAR(15), 
+	commission_percentage INT,
+	PRIMARY KEY(agent_id)
+)
+--------------
+
+--------------
+CREATE TABLE products(
+	product_id CHAR(2) NOT NULL,
+	description VARCHAR(20),
+	item_cost FLOAT,
+	number_of_item INT,
+	PRIMARY KEY(product_id)
+	
+)
+--------------
+
+--------------
+CREATE TABLE customers (
+    customer_id CHAR(2) NOT NULL,
+    first_name VARCHAR(30),
+    last_name VARCHAR(30),
+    city VARCHAR(15),
+    phone_number VARCHAR(20),
+    agent_id CHAR(2),
+    PRIMARY KEY (customer_id),
+    FOREIGN KEY (agent_id)
+        REFERENCES agents (agent_id)
+        ON DELETE RESTRICT
+)
+--------------
+
+--------------
+--create table pruchase
+CREATE TABLE purchases (
+    customer_id CHAR(2) NOT NULL,
+    product_id CHAR(2) NOT NULL,
+    quantity INT,
+    PRIMARY KEY (customer_id , product_id),
+    FOREIGN KEY (customer_id)
+        REFERENCES customers (customer_id),
+    FOREIGN KEY (product_id)
+        REFERENCES products (product_id)
+)
+--------------
+

@@ -1,0 +1,30 @@
+Warning: Using a password on the command line interface can be insecure.
+ERROR 1146 (42S02) at line 7: Table 'slu253assign2db.purchases' doesn't exist
+--------------
+SELECT * FROM agents
+--------------
+
+agent_id	FName	LName	city	commission_percentage
+11	Regis	Philbin	Boston	33
+12	Rosie	Cox	Ottawa	50
+22	Countney	Cox	New York	25
+23	Sheng	Lu	London	99
+33	David	Letterman	Bedrock	100
+66	Rosie	ODonnell	Ottawa	100
+99	hugh	Grant	Springfield	16
+--------------
+SELECT * FROM customers
+--------------
+
+customer_id	first_name	last_name	city	phone_number	agent_id
+10	Barney	Rubble	Bedrock	999-1234	11
+12	Monty	Burns	Springfield	789-0000	99
+13	Super	Man	Kypto	888-1234	33
+14	Peter	Griffens	Providence	987-4567	99
+15	Fred	Flintstone	Bedrock	777-2345	11
+21	Homer	Simpson	Springfield	686-8956	99
+31	Sideshow	Bob	Springfield	686-5555	66
+--------------
+SELECT * FROM purchases
+--------------
+
