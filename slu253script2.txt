@@ -1,0 +1,59 @@
+-- Sheng's File 2 script
+USE slu253assign2db;
+
+-- insert into product
+LOAD DATA LOCAL INFILE 'loaddatafall2018.txt' INTO TABLE products FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n';
+
+INSERT INTO products VALUES(66,'Elbow pads',14.25,120);
+INSERT INTO products VALUES(52,'play station',400,5);
+
+-- insert into agent
+INSERT INTO agents VALUES(99,'hugh','Grant','Springfield',16);
+INSERT INTO agents VALUES(22,'Countney','Cox','New York',25);
+INSERT INTO agents VALUES(66,'Rosie','ODonnell','Ottawa',100);
+INSERT INTO agents VALUES(33,'David','Letterman','Bedrock',100);
+INSERT INTO agents VALUES(11,'Regis','Philbin','Boston',33);
+INSERT INTO agents VALUES(12,'Rosie','Cox','Ottawa',50);
+INSERT INTO agents VALUES(23,'Sheng','Lu','London',99);
+
+-- insert into customers
+INSERT INTO customers(customer_id, first_name, last_name, city, phone_number,agent_id) VALUES(21, 'Homer', 'Simpson', 'Springfield', '686-8956',99);
+INSERT INTO customers(customer_id, first_name, last_name, city, phone_number,agent_id) VALUES(31,'Sideshow','Bob','Springfield','686-5555',66);
+INSERT INTO customers(customer_id, first_name, last_name, city, phone_number,agent_id) VALUES(12,'Monty','Burns','Springfield','789-0000',99);
+INSERT INTO customers(customer_id, first_name, last_name, city, phone_number,agent_id) VALUES(15,'Fred','Flintstone','Bedrock','777-2345',11);
+INSERT INTO customers(customer_id, first_name, last_name, city, phone_number,agent_id) VALUES(13,'Super','Man','Kypto','888-1234',33);
+INSERT INTO customers(customer_id, first_name, last_name, city, phone_number,agent_id) VALUES(10,'Barney','Rubble','Bedrock','999-1234',11);
+INSERT INTO customers(customer_id, first_name, last_name, city, phone_number,agent_id) VALUES(14,'Peter','Griffens','Providence','987-4567',99);
+
+-- insert into purchases
+INSERT INTO purchases VALUES(21,99,20);
+INSERT INTO purchases VALUES(21,12,14);
+INSERT INTO purchases VALUES(21,66,10);
+INSERT INTO purchases VALUES(31,99,1);
+INSERT INTO purchases VALUES(31,12,2);
+INSERT INTO purchases VALUES(31,78,4);
+INSERT INTO purchases VALUES(31,66,2);
+INSERT INTO purchases VALUES(15,66,2);
+INSERT INTO purchases VALUES(15,78,2);
+INSERT INTO purchases VALUES(14,66,19);
+
+-- show all the data
+SELECT * FROM agents;
+SELECT * FROM customers;
+SELECT * FROM products;
+SELECT * FROM purchases;
+
+-- update custumer's name
+UPDATE customers SET first_name='Wonder', last_name='Woman' WHERE first_name='Super' AND last_name='Man';
+-- update sideshow quantity
+UPDATE purchases SET quantity=5 WHERE customer_id=(SELECT customer_id FROM customers WHERE first_name='Sideshow' AND last_name='Bob');
+--update city info
+UPDATE customers SET city='Boston' WHERE agent_id=(SELECT agent_id FROM agents WHERE FName='Regis');
+
+-- prove work correctly
+SELECT * FROM agents;
+SELECT * FROM customers;
+SELECT * FROM products;
+SELECT * FROM purchases;
+
+

@@ -1,0 +1,31 @@
+-- Sheng's File 4 script
+USE slu253assign2db;
+
+-- show all tables
+SELECT * FROM agents;
+SELECT * FROM customers;
+SELECT * FROM purchases;
+SELECT * FROM products;
+
+-- create views
+CREATE VIEW info AS SELECT customers.first_name, customers.last_name, products.description, purchases.quantity, products.item_cost, products.item_cost * purchases.quantity AS total_cost FROM customers, products, purchases WHERE purchases.product_id = products.product_id and customers.customer_id = purchases.customer_id ORDER BY customers.last_name;
+
+-- show views
+SELECT * FROM info;
+
+-- show spent more than 100
+SELECT * FROM info WHERE total_cost > 100;
+
+-- delete product 
+DELETE FROM products WHERE description = 'play station';
+
+-- prove deletion works
+SELECT * FROM products;
+
+-- delete agent from Springfield
+DELETE FROM agents WHERE city ='Springfield';
+-- the row where agent called Hugh Grant from Springfield cannot be deleted because ON DELETE RESTRICT is set to customers. Since agent_id is a foreign key for the customer tabel and Hugh Grant deals with Homer, Monty and Peter. Therefore, this row cannot be deleted.
+
+
+
+
