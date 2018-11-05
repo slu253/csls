@@ -47,7 +47,7 @@ SELECT * FROM purchases;
 UPDATE customers SET first_name='Wonder', last_name='Woman' WHERE first_name='Super' AND last_name='Man';
 -- update sideshow quantity
 UPDATE purchases SET quantity=5 WHERE customer_id=(SELECT customer_id FROM customers WHERE first_name='Sideshow' AND last_name='Bob');
---update city info
+-- update city info
 UPDATE customers SET city='Boston' WHERE agent_id=(SELECT agent_id FROM agents WHERE FName='Regis');
 
 -- prove work correctly
@@ -55,5 +55,3 @@ SELECT * FROM agents;
 SELECT * FROM customers;
 SELECT * FROM products;
 SELECT * FROM purchases;
-
-

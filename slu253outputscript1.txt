@@ -1,7 +1,4 @@
 Warning: Using a password on the command line interface can be insecure.
-ERROR 1064 (42000) at line 53: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '--create table pruchase
-CREATE TABLE purchases (
-    customer_id CHAR(2) NOT NUL' at line 1
 --------------
 SHOW DATABASES
 --------------
@@ -81,7 +78,6 @@ CREATE TABLE customers (
 --------------
 
 --------------
---create table pruchase
 CREATE TABLE purchases (
     customer_id CHAR(2) NOT NULL,
     product_id CHAR(2) NOT NULL,
@@ -94,3 +90,12 @@ CREATE TABLE purchases (
 )
 --------------
 
+--------------
+SHOW TABLES
+--------------
+
+Tables_in_slu253assign2db
+agents
+customers
+products
+purchases

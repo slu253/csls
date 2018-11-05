@@ -1,5 +1,4 @@
 Warning: Using a password on the command line interface can be insecure.
-ERROR 1146 (42S02) at line 23: Table 'slu253assign2db.purchases' doesn't exist
 --------------
 SELECT description from products
 --------------
@@ -17,7 +16,7 @@ SELECT DISTINCT city from customers
 --------------
 
 city
-Bedrock
+Boston
 Springfield
 Kypto
 Providence
@@ -59,3 +58,76 @@ Knee Pads
 SELECT customers.last_name, products.description, purchases.quantity FROM customers, products, purchases WHERE purchases.customer_id = customers.customer_id AND purchases.product_id = products.product_id
 --------------
 
+last_name	description	quantity
+Griffens	Elbow pads	19
+Flintstone	Elbow pads	2
+Flintstone	Knee Pads	2
+Simpson	Socks	14
+Simpson	Elbow pads	10
+Simpson	Helmet	20
+Bob	Socks	5
+Bob	Elbow pads	5
+Bob	Knee Pads	5
+Bob	Helmet	5
+--------------
+SELECT SUM(purchases.quantity) AS "Homer's Total Purchase" FROM purchases, customers WHERE customers.customer_id = purchases.customer_id AND customers.first_name = 'Homer'
+--------------
+
+Homer's Total Purchase
+44
+--------------
+SELECT customers.first_name, customers.last_name, SUM(purchases.quantity) AS 'Total number of purchase' FROM purchases, customers WHERE customers.customer_id = purchases.customer_id GROUP BY customers.customer_id
+--------------
+
+first_name	last_name	Total number of purchase
+Peter	Griffens	19
+Fred	Flintstone	4
+Homer	Simpson	44
+Sideshow	Bob	20
+--------------
+SELECT description, number_of_item FROM products where product_id NOT IN(SELECT product_id FROM purchases)
+--------------
+
+description	number_of_item
+Bike	200
+play station	5
+Roller Blades	89
+--------------
+SELECT description, number_of_item FROM products WHERE product_id NOT IN (SELECT purchases.product_id FROM purchases, customers WHERE purchases.customer_id = customers.customer_id AND customers.first_name = 'Fred' AND customers.last_name = 'Flintstone')
+--------------
+
+description	number_of_item
+Bike	200
+Socks	100
+play station	5
+Roller Blades	89
+Helmet	30
+--------------
+SELECT agents.FName, agents.LName, customers.first_name, customers.last_name FROM agents, customers WHERE customers.city = agents.city
+--------------
+
+FName	LName	first_name	last_name
+Regis	Philbin	Barney	Rubble
+hugh	Grant	Monty	Burns
+Regis	Philbin	Fred	Flintstone
+hugh	Grant	Homer	Simpson
+hugh	Grant	Sideshow	Bob
+--------------
+SELECT SUM(quantity) AS 'Total number of knee' FROM purchases WHERE product_id = (SELECT product_id FROM products WHERE description = 'Knee Pads')
+--------------
+
+Total number of knee
+7
+--------------
+SELECT description FROM products WHERE product_id =(SELECT product_id FROM(SELECT product_id, count(customer_id) AS num_of_purchasers FROM purchases GROUP BY product_id) AS count WHERE num_of_purchasers > 3)
+--------------
+
+description
+Elbow pads
+--------------
+SELECT FName, LName from agents WHERE agent_id IN(SELECT agent_id from customers, purchases WHERE purchases.customer_id = customers.customer_id AND purchases.product_id = 78)
+--------------
+
+FName	LName
+Regis	Philbin
+Rosie	ODonnell

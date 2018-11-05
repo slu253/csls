@@ -50,7 +50,7 @@ CREATE TABLE customers (
         ON DELETE RESTRICT
 );
 
---create table pruchase
+-- create table pruchase
 CREATE TABLE purchases (
     customer_id CHAR(2) NOT NULL,
     product_id CHAR(2) NOT NULL,
@@ -62,8 +62,5 @@ CREATE TABLE purchases (
         REFERENCES products (product_id)
 );
 
---show table again
+-- show table again
 SHOW TABLES;
-
-
-
